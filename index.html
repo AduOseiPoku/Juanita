@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person Waakyelina ❤️</title>
+    <style>
+        :root {
+            --primary-color: #ff4b5c;
+            --bg-color: #fff5f6;
+            --text-color: #4a4a4a;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin: clamp(20px, 8vw, 50px) 0 clamp(15px, 5vw, 30px);
+            animation: fadeIn 2s ease-in;
+            padding: 0 10px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+
+        header p {
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+        }
+
+        .heart {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            animation: heartbeat 1.2s infinite;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 0 10px;
+        }
+
+        .main-card, .reasons-section {
+            background: var(--card-bg);
+            padding: clamp(20px, 5vw, 35px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 75, 92, 0.08);
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .main-card {
+            text-align: center;
+        }
+
+        .letter-p {
+            font-size: clamp(1rem, 3.5vw, 1.1rem);
+            margin-bottom: 20px;
+            color: #555;
+            text-align: left;
+        }
+
+        .letter-p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .reasons-section h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: clamp(1.3rem, 5vw, 1.6rem);
+        }
+
+        .reason-item {
+            background: var(--bg-color);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--primary-color);
+            font-weight: 500;
+            font-size: clamp(0.95rem, 3.5vw, 1.05rem);
+            text-align: left;
+        }
+
+        .reason-item:last-child {
+            margin-bottom: 0;
+        }
+
+        footer {
+            text-align: center;
+            margin: auto 0 30px;
+            font-size: 0.9rem;
+            color: #999;
+            padding-top: 20px;
+        }
+
+        /* Animations */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            20% { transform: scale(1.1); }
+            40% { transform: scale(1.05); }
+            60% { transform: scale(1.15); }
+            80% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="heart">❤️</div>
+        <h1>Hey Juanita A.K.A Waakyelina, My Queen, ❤️</h1>
+        <p>Just a little reminder of how much you mean to me.</p>
+    </header>
+
+    <div class="container">
+        <!-- Main Love Letter Section -->
+        <div class="main-card">
+            <p class="letter-p">
+                I wanted to build something real to show you how much I appreciate having you in my life. You make the good days better and the hard days completely worth it.
+            </p>
+            <p class="letter-p">
+                Thank you for being my peace, my laughter, and my favorite person to share everything with. 
+            </p>
+        </div>
+
+        <!-- Reasons Section -->
+        <div class="reasons-section">
+            <h2>A Few Reasons Why I Love You</h2>
+            <div class="reason-item">✨ The way your smile instantly brightens up my entire day eventhough you laugh anyhow. LoL</div>
+            <div class="reason-item"> How you listen to me, challenge me, and make me a better person every day.</div>
+            <div class="reason-item"> Your incredible heart and how deeply you care for people.</div>
+            <div class="reason-item"> Every single small moment, laugh, and late-night conversation we share.</div>
+            <div class="reason-item"> You always give me a reason to stay alive.</div>
+            <div class="reason-item"> The light of my world as I always say.</div>
+        </div>
+    </div>
+
+    <footer>
+        Made with ❤️ by Yours Junior
+    </footer>
+
+</body>
+</html>
