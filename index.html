@@ -1,171 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Favorite Person Waakyelina ❤️</title>
-    <style>
-        :root {
-            --primary-color: #ff4b5c;
-            --bg-color: #fff5f6;
-            --text-color: #4a4a4a;
-            --card-bg: #ffffff;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For My Queen ❤️</title>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-        header {
-            text-align: center;
-            margin: clamp(20px, 8vw, 50px) 0 clamp(15px, 5vw, 30px);
-            animation: fadeIn 2s ease-in;
-            padding: 0 10px;
-        }
+<style>
+:root{
+    --bg1:#fff5f6;
+    --bg2:#ffe4ea;
+    --card:rgba(255,255,255,0.75);
+    --text:#333;
+    --primary:#ff4b5c;
+}
 
-        h1 {
-            color: var(--primary-color);
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
-            margin-bottom: 10px;
-            word-wrap: break-word;
-        }
+body.dark{
+    --bg1:#0f0f1a;
+    --bg2:#1b1b2a;
+    --card:rgba(30,30,40,0.7);
+    --text:#fff;
+}
 
-        header p {
-            font-size: clamp(0.95rem, 3vw, 1.1rem);
-        }
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,var(--bg1),var(--bg2));
+    color:var(--text);
+    transition:0.5s;
+    overflow-x:hidden;
+}
 
-        .heart {
-            font-size: clamp(2.5rem, 8vw, 3.5rem);
-            animation: heartbeat 1.2s infinite;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
+/* HEADER */
+header{
+    text-align:center;
+    padding:40px 20px;
+}
 
-        .container {
-            width: 100%;
-            max-width: 600px;
-            padding: 0 10px;
-        }
+.heart{
+    font-size:50px;
+    animation:beat 1.2s infinite;
+}
 
-        .main-card, .reasons-section {
-            background: var(--card-bg);
-            padding: clamp(20px, 5vw, 35px);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 75, 92, 0.08);
-            margin-bottom: 25px;
-            width: 100%;
-        }
+@keyframes beat{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.2)}
+}
 
-        .main-card {
-            text-align: center;
-        }
+/* TYPING */
+#typing{
+    font-size:18px;
+    margin-top:10px;
+    min-height:30px;
+}
 
-        .letter-p {
-            font-size: clamp(1rem, 3.5vw, 1.1rem);
-            margin-bottom: 20px;
-            color: #555;
-            text-align: left;
-        }
+/* CARD */
+.card{
+    max-width:700px;
+    margin:20px auto;
+    background:var(--card);
+    backdrop-filter:blur(10px);
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
 
-        .letter-p:last-of-type {
-            margin-bottom: 0;
-        }
+/* LETTER */
+.letter-p{
+    font-size:16px;
+    line-height:1.6;
+}
 
-        .reasons-section h2 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: clamp(1.3rem, 5vw, 1.6rem);
-        }
+/* REASONS */
+.reason-item{
+    background:rgba(255,75,92,0.1);
+    padding:10px;
+    margin:10px 0;
+    border-left:4px solid var(--primary);
+    border-radius:10px;
+    transition:0.3s;
+}
 
-        .reason-item {
-            background: var(--bg-color);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            border-left: 4px solid var(--primary-color);
-            font-weight: 500;
-            font-size: clamp(0.95rem, 3.5vw, 1.05rem);
-            text-align: left;
-        }
+.reason-item:hover{
+    transform:translateY(-5px);
+}
 
-        .reason-item:last-child {
-            margin-bottom: 0;
-        }
+/* BUTTONS */
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:var(--primary);
+    color:white;
+    margin:5px;
+}
 
-        footer {
-            text-align: center;
-            margin: auto 0 30px;
-            font-size: 0.9rem;
-            color: #999;
-            padding-top: 20px;
-        }
+/* FLOAT HEARTS */
+.heart-float{
+    position:fixed;
+    color:pink;
+    font-size:20px;
+    animation:floatUp 5s linear forwards;
+}
 
-        /* Animations */
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            20% { transform: scale(1.1); }
-            40% { transform: scale(1.05); }
-            60% { transform: scale(1.15); }
-            80% { transform: scale(1); }
-            100% { transform: scale(1); }
-        }
+@keyframes floatUp{
+    from{transform:translateY(100vh);opacity:1}
+    to{transform:translateY(-100px);opacity:0}
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.6);
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-content{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    max-width:400px;
+    text-align:center;
+}
+
+/* TOPBAR */
+.topbar{
+    position:fixed;
+    top:10px;
+    right:10px;
+}
+</style>
 </head>
+
 <body>
 
-    <header>
-        <div class="heart">❤️</div>
-        <h1>Hey Juanita A.K.A Waakyelina, My Queen, My Angel ❤️</h1>
-        <p>Just a little reminder of how much you mean to me.</p>
-    </header>
+<div class="topbar">
+<button onclick="toggleDark()">🌙</button>
+</div>
 
-    <div class="container">
-        <!-- Main Love Letter Section -->
-        <div class="main-card">
-            <p class="letter-p">
-                I wanted to build something real to show you how much I appreciate having you in my life. You make the good days better and the hard days completely worth it.
-            </p>
-            <p class="letter-p">
-                Thank you for being my peace, my laughter, and my favorite person to share everything with. 
-            </p>
-        </div>
+<header>
+<div class="heart">❤️</div>
+<h1>Hey My Queen ❤️</h1>
+<div id="typing"></div>
+</header>
 
-        <!-- Reasons Section -->
-        <div class="reasons-section">
-            <h2>A Few Reasons Why I Love You</h2>
-            <div class="reason-item">✨ The way your smile instantly brightens up my entire day eventhough you laugh anyhow. LoL</div>
-            <div class="reason-item"> How you listen to me, challenge me, and make me a better person every day.</div>
-            <div class="reason-item"> Your incredible heart and how deeply you care for people.</div>
-            <div class="reason-item"> Every single small moment, laugh, and late-night conversation we share.</div>
-            <div class="reason-item"> You always give me a reason to stay alive.</div>
-            <div class="reason-item"> The light of my world as I always say.</div>
-            <div class="reason-item"> I love you my Angel. Muahhhh</div>
-        </div>
-    </div>
+<!-- UPDATED LOVE LETTER SECTION -->
+<div class="card">
+<div class="main-card">
 
-    <footer>
-        Made with ❤️ by Yours Junior
-    </footer>
+<p class="letter-p">
+I wanted to build something real to show you how much I appreciate having you in my life. You make the good days better and the hard days completely worth it.
+</p>
+
+<p class="letter-p">
+Thank you for being my peace, my laughter, and my favorite person to share everything with.
+</p>
+
+</div>
+</div>
+
+<!-- UPDATED REASONS SECTION -->
+<div class="card">
+<h2>A Few Reasons Why I Love You ❤️</h2>
+
+<div class="reason-item">✨ The way your smile instantly brightens up my entire day eventhough you laugh anyhow. LoL</div>
+
+<div class="reason-item">How you listen to me, challenge me, and make me a better person every day.</div>
+
+<div class="reason-item">Your incredible heart and how deeply you care for people.</div>
+
+<div class="reason-item">Every single small moment, laugh, and late-night conversation we share.</div>
+
+<div class="reason-item">You always give me a reason to stay alive.</div>
+
+<div class="reason-item">The light of my world as I always say.</div>
+
+<div class="reason-item">I love you my Angel. Muahhhh ❤️</div>
+</div>
+
+<!-- SURPRISE SECTION -->
+<div class="card">
+<h2>Surprises 🎁</h2>
+
+<button onclick="loveExplosion()">Click Me ❤️</button>
+<button onclick="openModal()">Secret Message</button>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3>💖 Secret Message</h3>
+<p>No matter what happens, I will always choose you.</p>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+
+<script>
+/* TYPING */
+const text = "Just a little reminder that you mean everything to me ❤️";
+let i = 0;
+function type(){
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type,50);
+    }
+}
+type();
+
+/* FLOAT HEARTS */
+setInterval(()=>{
+    const heart = document.createElement("div");
+    heart.className="heart-float";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+},800);
+
+/* CONFETTI */
+function loveExplosion(){
+    confetti({
+        particleCount: 150,
+        spread: 80
+    });
+}
+
+/* MODAL */
+function openModal(){
+    document.getElementById("modal").style.display="flex";
+}
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+}
+
+/* DARK MODE */
+function toggleDark(){
+    document.body.classList.toggle("dark");
+}
+</script>
 
 </body>
 </html>
