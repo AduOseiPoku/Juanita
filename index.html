@@ -665,6 +665,7 @@
             z-index: 10;
         }
 
+
         .btn-proposal-no {
             background: #7d4f56;
             font-size: 1rem;
@@ -672,6 +673,74 @@
             position: absolute;
             transition: all 0.2s ease;
             z-index: 9;
+        }
+
+        /* WHEEL DECIDER SYSTEM */
+        .decider-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 10px auto;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid var(--accent);
+            z-index: 10;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+        }
+
+        #wheelCanvas {
+            border-radius: 50%;
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);
+        }
+
+        .wheel-spin-btn {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 4px solid var(--accent);
+            color: var(--text-primary);
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            z-index: 5;
+            transition: transform 0.2s;
+            outline: none;
+            font-family: var(--font-sans);
+        }
+
+        .wheel-spin-btn:hover {
+            transform: scale(1.08);
+            color: var(--accent);
+        }
+
+        .wheel-spin-btn:active {
+            transform: scale(0.95);
         }
 
 
@@ -1106,528 +1175,656 @@
                 </div>
                 <div class="jar-prompt-text" id="jar-instruction">Tap to shake & open 💖</div>
             </div>
-        <!-- CORE CARD 4: THE PROPOSAL DECIDER -->
-        <div class="card proposal-card">
-            <h2><i class="fas fa-ring"></i> The Big Question</h2>
-            <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 20px;">
-                I have a very important question to ask you...
-            </p>
-            <div class="proposal-container">
-                <h3 class="proposal-question">Will you marry me, Juanita? 💍</h3>
-                <div class="proposal-buttons">
-                    <button class="btn-action btn-proposal-yes" onclick="proposeYes()">YES! 💖</button>
-                    <button class="btn-action btn-proposal-no" id="btnNo" onmouseover="dodgeNo()" onclick="dodgeNo()">No 😢</button>
+            <!-- CORE CARD 4: THE PROPOSAL DECIDER -->
+            <div class="card proposal-card">
+                <h2><i class="fas fa-ring"></i> The Big Question</h2>
+                <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 20px;">
+                    I have a very important question to ask you...
+                </p>
+                <div class="proposal-container">
+                    <h3 class="proposal-question">Will you marry me, Juanita? 💍</h3>
+                    <div class="proposal-buttons">
+                        <button class="btn-action btn-proposal-yes" onclick="proposeYes()">YES! 💖</button>
+                        <button class="btn-action btn-proposal-no" id="btnNo" onmouseover="dodgeNo()"
+                            onclick="dodgeNo()">No 😢</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CORE CARD 5: DATE NIGHT DECIDER -->
+            <div class="card decider-card">
+                <h2><i class="fas fa-random"></i> Date Night Decider</h2>
+                <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 20px;">
+                    Can't decide what to do? Let the wheel of romance choose your next adventure!
+                </p>
+                <div class="wheel-container">
+                    <div class="wheel-pointer"></div>
+                    <canvas id="wheelCanvas" width="280" height="280"></canvas>
+                    <button class="wheel-spin-btn" onclick="spinWheel()">SPIN</button>
+                </div>
+                <div id="wheel-result"
+                    style="margin-top: 15px; font-weight: 700; color: var(--accent); min-height: 24px; font-size: 1.1rem; text-align: center;">
+                </div>
+            </div>
+
+        </div> <!-- End grid container -->
+
+        <!-- PRESERVED & REDESIGNED REASONS SECTION -->
+        <div class="card" style="margin-top: 40px;">
+            <h2><i class="fas fa-heart"></i> Why I Love You</h2>
+            <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 25px;">A few little reminders of
+                why
+                you are my whole world:</p>
+
+            <div class="reasons-list">
+                <!-- REASON 1 -->
+                <div class="reason-item">
+                    <i class="fas fa-sparkles"></i>
+                    <div>✨ The way your smile instantly brightens up my entire day eventhough you laugh anyhow. LoL
+                    </div>
+                </div>
+                <!-- REASON 2 -->
+                <div class="reason-item">
+                    <i class="fas fa-compass"></i>
+                    <div>How you listen to me, challenge me, and make me a better person every day.</div>
+                </div>
+                <!-- REASON 3 -->
+                <div class="reason-item">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <div>Your incredible heart and how deeply you care for people.</div>
+                </div>
+                <!-- REASON 4 -->
+                <div class="reason-item">
+                    <i class="fas fa-moon"></i>
+                    <div>Every single small moment, laugh, and late-night conversation we share.</div>
+                </div>
+                <!-- REASON 5 -->
+                <div class="reason-item">
+                    <i class="fas fa-shield-halved"></i>
+                    <div>You always give me a reason to stay alive.</div>
+                </div>
+                <!-- REASON 6 -->
+                <div class="reason-item">
+                    <i class="fas fa-sun"></i>
+                    <div>The light of my world as I always say.</div>
+                </div>
+                <!-- REASON 7 -->
+                <div class="reason-item">
+                    <i class="fas fa-angles-right"></i>
+                    <div>I love you my Angel. Muahhhh ❤️</div>
                 </div>
             </div>
         </div>
 
-    </div> <!-- End grid container -->
+        <!-- POLAROID GALLERY SECTION -->
+        <div class="card">
+            <h2><i class="fas fa-images"></i> Visual Memory Lane</h2>
+            <p style="font-size: 0.92rem; color: var(--text-secondary);">Hover or tap on our polaroids to relive our
+                beautiful moments together.</p>
 
-    <!-- PRESERVED & REDESIGNED REASONS SECTION -->
-    <div class="card" style="margin-top: 40px;">
-        <h2><i class="fas fa-heart"></i> Why I Love You</h2>
-        <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 25px;">A few little reminders of why
-            you are my whole world:</p>
-
-        <div class="reasons-list">
-            <!-- REASON 1 -->
-            <div class="reason-item">
-                <i class="fas fa-sparkles"></i>
-                <div>✨ The way your smile instantly brightens up my entire day eventhough you laugh anyhow. LoL</div>
-            </div>
-            <!-- REASON 2 -->
-            <div class="reason-item">
-                <i class="fas fa-compass"></i>
-                <div>How you listen to me, challenge me, and make me a better person every day.</div>
-            </div>
-            <!-- REASON 3 -->
-            <div class="reason-item">
-                <i class="fas fa-hand-holding-heart"></i>
-                <div>Your incredible heart and how deeply you care for people.</div>
-            </div>
-            <!-- REASON 4 -->
-            <div class="reason-item">
-                <i class="fas fa-moon"></i>
-                <div>Every single small moment, laugh, and late-night conversation we share.</div>
-            </div>
-            <!-- REASON 5 -->
-            <div class="reason-item">
-                <i class="fas fa-shield-halved"></i>
-                <div>You always give me a reason to stay alive.</div>
-            </div>
-            <!-- REASON 6 -->
-            <div class="reason-item">
-                <i class="fas fa-sun"></i>
-                <div>The light of my world as I always say.</div>
-            </div>
-            <!-- REASON 7 -->
-            <div class="reason-item">
-                <i class="fas fa-angles-right"></i>
-                <div>I love you my Angel. Muahhhh ❤️</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- POLAROID GALLERY SECTION -->
-    <div class="card">
-        <h2><i class="fas fa-images"></i> Visual Memory Lane</h2>
-        <p style="font-size: 0.92rem; color: var(--text-secondary);">Hover or tap on our polaroids to relive our
-            beautiful moments together.</p>
-
-        <div class="polaroid-gallery">
-            <!-- Featured generated image -->
-            <div class="polaroid" style="--rotation: -3deg;">
-                <div class="polaroid-img-container">
-                    <img src="romantic_sunset.png" alt="Couple Silhouette">
+            <div class="polaroid-gallery">
+                <!-- Featured generated image -->
+                <div class="polaroid" style="--rotation: -3deg;">
+                    <div class="polaroid-img-container">
+                        <img src="romantic_sunset.png" alt="Couple Silhouette">
+                    </div>
+                    <div class="polaroid-caption">Where our hearts aligned ✨</div>
                 </div>
-                <div class="polaroid-caption">Where our hearts aligned ✨</div>
-            </div>
-            <!-- Polaroid 2 -->
-            <div class="polaroid" style="--rotation: 2deg;">
-                <div class="polaroid-img-container">
-                    <img src="Juanita 1.JPG" alt="Juanita 1">
+                <!-- Polaroid 2 -->
+                <div class="polaroid" style="--rotation: 2deg;">
+                    <div class="polaroid-img-container">
+                        <img src="Juanita 1.JPG" alt="Juanita 1">
+                    </div>
+                    <div class="polaroid-caption">Too hot for the planet 🍕</div>
                 </div>
-                <div class="polaroid-caption">Too hot for the planet 🍕</div>
-            </div>
-            <!-- Polaroid 3 -->
-            <div class="polaroid" style="--rotation: -1deg;">
-                <div class="polaroid-img-container">
-                    <img src="Juanita 2.JPG" alt="Juanita 2">
+                <!-- Polaroid 3 -->
+                <div class="polaroid" style="--rotation: -1deg;">
+                    <div class="polaroid-img-container">
+                        <img src="Juanita 2.JPG" alt="Juanita 2">
+                    </div>
+                    <div class="polaroid-caption">Hottest Baby 📸</div>
                 </div>
-                <div class="polaroid-caption">Hottest Baby 📸</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- RELATIONSHIP MILESTONES TIMELINE -->
-    <div class="timeline-section">
-        <h2 style="justify-content: center; margin-bottom: 40px; font-family: var(--font-serif);"><i
-                class="fas fa-route" style="color: var(--accent);"></i> Our Journey So Far</h2>
-
-        <!-- Milestone 1 -->
-        <div class="timeline-block">
-            <div class="timeline-pointer"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="timeline-content">
-                <span class="timeline-date">March 14, 2026</span>
-                <h3 class="timeline-title">The First Day(My birthday) 📍</h3>
-                <p class="timeline-desc">The moment our paths crossed and my world began to change for the better. A day
-                    I will hold in my heart forever.</p>
             </div>
         </div>
 
-        <!-- Milestone 2 -->
-        <div class="timeline-block">
-            <div class="timeline-pointer"><i class="fas fa-mug-hot"></i></div>
-            <div class="timeline-content">
-                <span class="timeline-date">September 05, 2024</span>
-                <h3 class="timeline-title">Our First Ice Cream Date ☕</h3>
-                <p class="timeline-desc">I saw the nervousness in your eyes you know. You were blushing really hard. I
-                    just wanted to hug you really tight. </p>
+        <!-- RELATIONSHIP MILESTONES TIMELINE -->
+        <div class="timeline-section">
+            <h2 style="justify-content: center; margin-bottom: 40px; font-family: var(--font-serif);"><i
+                    class="fas fa-route" style="color: var(--accent);"></i> Our Journey So Far</h2>
+
+            <!-- Milestone 1 -->
+            <div class="timeline-block">
+                <div class="timeline-pointer"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">March 14, 2026</span>
+                    <h3 class="timeline-title">The First Day(My birthday) 📍</h3>
+                    <p class="timeline-desc">The moment our paths crossed and my world began to change for the better. A
+                        day
+                        I will hold in my heart forever.</p>
+                </div>
+            </div>
+
+            <!-- Milestone 2 -->
+            <div class="timeline-block">
+                <div class="timeline-pointer"><i class="fas fa-mug-hot"></i></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">September 05, 2024</span>
+                    <h3 class="timeline-title">Our First Ice Cream Date ☕</h3>
+                    <p class="timeline-desc">I saw the nervousness in your eyes you know. You were blushing really hard.
+                        I
+                        just wanted to hug you really tight. </p>
+                </div>
+            </div>
+
+            <!-- Milestone 3 -->
+            <div class="timeline-block">
+                <div class="timeline-pointer"><i class="fas fa-heart"></i></div>
+                <div class="timeline-content">
+                    <span class="timeline-date">April 3, 2026</span>
+                    <h3 class="timeline-title">Prayer Dine 💖</h3>
+                    <p class="timeline-desc">The first time we spent soo much time together. I remember walking you to
+                        get a
+                        car while we spoke. I remember the spark that was in your eyes.</p>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- FLOATING MUSIC PLAYER -->
+        <div class="music-widget" id="musicPlayer">
+            <button class="music-play-btn" onclick="toggleMusic()" id="playIcon">
+                <i class="fas fa-play"></i>
+            </button>
+            <div class="music-info">
+                <div class="music-title">Acoustic Love Song</div>
+                <div class="music-artist">Instrumental Romance</div>
+            </div>
+            <div class="visualizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </div>
 
-        <!-- Milestone 3 -->
-        <div class="timeline-block">
-            <div class="timeline-pointer"><i class="fas fa-heart"></i></div>
-            <div class="timeline-content">
-                <span class="timeline-date">April 3, 2026</span>
-                <h3 class="timeline-title">Prayer Dine 💖</h3>
-                <p class="timeline-desc">The first time we spent soo much time together. I remember walking you to get a
-                    car while we spoke. I remember the spark that was in your eyes.</p>
+        <!-- AUDIO ELEMENT -->
+        <audio id="bgMusic" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- POPUP MODALS -->
+        <!-- Note Modal -->
+        <div class="modal" id="noteModal">
+            <div class="modal-content">
+                <h3>💖 Note from my Heart</h3>
+                <div class="modal-note" id="loveNoteContent">No matter what happens, I will always choose you.</div>
+                <button class="btn-action" onclick="closeModal('noteModal')">Close 🌸</button>
             </div>
         </div>
 
-
-    </div>
-
-    <!-- FLOATING MUSIC PLAYER -->
-    <div class="music-widget" id="musicPlayer">
-        <button class="music-play-btn" onclick="toggleMusic()" id="playIcon">
-            <i class="fas fa-play"></i>
-        </button>
-        <div class="music-info">
-            <div class="music-title">Acoustic Love Song</div>
-            <div class="music-artist">Instrumental Romance</div>
-        </div>
-        <div class="visualizer">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </div>
-
-    <!-- AUDIO ELEMENT -->
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- POPUP MODALS -->
-    <!-- Note Modal -->
-    <div class="modal" id="noteModal">
-        <div class="modal-content">
-            <h3>💖 Note from my Heart</h3>
-            <div class="modal-note" id="loveNoteContent">No matter what happens, I will always choose you.</div>
-            <button class="btn-action" onclick="closeModal('noteModal')">Close 🌸</button>
-        </div>
-    </div>
-
-    <!-- Proposal Modal -->
-    <div class="modal" id="proposalModal">
-        <div class="modal-content" style="max-width: 500px;">
-            <div style="font-size: 3.5rem; margin-bottom: 10px;">💍✨❤️</div>
-            <h3 style="font-size: 1.8rem; color: var(--accent);">She Said Yes!</h3>
-            <div class="modal-note" style="transform: rotate(0deg); margin-bottom: 20px; font-family: var(--font-serif); font-size: 1.4rem;">
-                "My heart is, and always will be, yours." ❤️
+        <!-- Proposal Modal -->
+        <div class="modal" id="proposalModal">
+            <div class="modal-content" style="max-width: 500px;">
+                <div style="font-size: 3.5rem; margin-bottom: 10px;">💍✨❤️</div>
+                <h3 style="font-size: 1.8rem; color: var(--accent);">She Said Yes!</h3>
+                <div class="modal-note"
+                    style="transform: rotate(0deg); margin-bottom: 20px; font-family: var(--font-serif); font-size: 1.4rem;">
+                    "My heart is, and always will be, yours." ❤️
+                </div>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary); margin-top: 10px;">
+                    This is the beginning of our forever. I love you so much, my Queen!
+                </p>
+                <button class="btn-action" onclick="closeModal('proposalModal')"
+                    style="margin-top: 10px; padding: 12px 28px;">Forever & Always 🌸</button>
             </div>
-            <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary); margin-top: 10px;">
-                This is the beginning of our forever. I love you so much, my Queen!
-            </p>
-            <button class="btn-action" onclick="closeModal('proposalModal')" style="margin-top: 10px; padding: 12px 28px;">Forever & Always 🌸</button>
         </div>
-    </div>
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        /* TYPING EFFECT */
-        const typingText = "Just a little reminder that you mean everything to me ❤️";
-        let typingIdx = 0;
-        function typeText() {
-            if (typingIdx < typingText.length) {
-                document.getElementById("typing").innerHTML += typingText.charAt(typingIdx);
-                typingIdx++;
-                setTimeout(typeText, 60);
+        <!-- JAVASCRIPT LOGIC -->
+        <script>
+            /* TYPING EFFECT */
+            const typingText = "Just a little reminder that you mean everything to me ❤️";
+            let typingIdx = 0;
+            function typeText() {
+                if (typingIdx < typingText.length) {
+                    document.getElementById("typing").innerHTML += typingText.charAt(typingIdx);
+                    typingIdx++;
+                    setTimeout(typeText, 60);
+                }
             }
-        }
-        typeText();
+            typeText();
 
-        /* DARK MODE TOGGLE */
-        function toggleDark() {
-            document.body.classList.toggle("dark");
-            const themeBtn = document.getElementById("theme-btn");
-            if (document.body.classList.contains("dark")) {
-                themeBtn.innerHTML = "☀️";
-            } else {
-                themeBtn.innerHTML = "🌙";
-            }
-        }
-
-        /* FLOATING HEARTS EFFECT */
-        setInterval(() => {
-            const heart = document.createElement("div");
-            heart.className = "heart-float";
-
-            // Random hearts icon styling
-            const icons = ["❤️", "💖", "💝", "💕", "🌸"];
-            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-
-            heart.style.left = Math.random() * 100 + "vw";
-            const size = Math.random() * 15 + 12; // size between 12px and 27px
-            heart.style.fontSize = size + "px";
-            heart.style.opacity = Math.random() * 0.5 + 0.4;
-
-            // Random float speed
-            const duration = Math.random() * 2.5 + 3.5; // between 3.5s and 6s
-            heart.style.animationDuration = duration + "s";
-
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), duration * 1000);
-        }, 1200);
-
-        /* CONFETTI BURST */
-        function loveExplosion() {
-            confetti({
-                particleCount: 150,
-                spread: 80,
-                origin: { y: 0.65 }
-            });
-        }
-
-        /* ENVELOPE OPEN/CLOSE toggle */
-        function toggleEnvelope() {
-            const envelope = document.getElementById("loveEnvelope");
-            const prompt = document.getElementById("envelope-tip");
-            envelope.classList.toggle("open");
-            if (envelope.classList.contains("open")) {
-                prompt.innerHTML = "<i class='fas fa-envelope'></i> Tap to Close Letter";
-                loveExplosion();
-            } else {
-                prompt.innerHTML = "<i class='fas fa-hand-pointer'></i> Tap to Open Letter";
-            }
-        }
-
-        /* LOVE NOTE JAR MESSAGES */
-        const loveNotes = [
-            "You are my favorite distraction. 🥰",
-            "I fall in love with you all over again, every single day.",
-            "My favorite place in the world is right next to you. 🌎",
-            "You make my heart smile in ways nobody else can.",
-            "You are my peace, my home, and my favorite person.",
-            "Thank you for existing. My life is so much brighter with you in it.",
-            "I love your laugh, your smile, and the warmth you bring to my soul. ✨",
-            "No matter what happens, I will always choose you. 💖",
-            "You are the light of my world, my angel.",
-            "I love every single detail about you. Yes, even your quirks! 😉",
-            "Sending you a massive virtual hug and a million kisses. Muahhh! 😘",
-            "You represent everything I ever dreamed of.",
-            "My love for you grows with every sunrise. 🌅",
-            "You make the hard days completely worth it."
-        ];
-
-        function pullLoveNote() {
-            const jar = document.getElementById("loveJar");
-            const instruction = document.getElementById("jar-instruction");
-
-            jar.classList.add("shake");
-            instruction.innerHTML = "Opening love jar...";
-
-            setTimeout(() => {
-                jar.classList.remove("shake");
-                const randomNote = loveNotes[Math.floor(Math.random() * loveNotes.length)];
-                document.getElementById("loveNoteContent").innerText = randomNote;
-                openModal('noteModal');
-                instruction.innerHTML = "Tap to shake & open 💖";
-            }, 600);
-        }
-
-        /* SCRATCH-OFF CARD COMPONENT */
-        const vouchers = [
-            "A Romantic Candlelit Dinner cooked by me! 🍳",
-            "A Cozy Movie Marathon night with unlimited popcorn! 🍿",
-            "A Sweet Ice Cream Date & Sunset Walk! 🍦",
-            "A Relaxing Massage and Spa night at home! 💆‍♀️",
-            "A Shopping Spree voucher! 🛍️",
-            "A spontaneous weekend road trip to wherever! 🚗"
-        ];
-
-        let canvas, ctx;
-        let isScratching = false;
-
-        function initScratchCard() {
-            canvas = document.getElementById('scratch-canvas');
-            ctx = canvas.getContext('2d');
-
-            // Randomly select voucher
-            const selectedVoucher = vouchers[Math.floor(Math.random() * vouchers.length)];
-            document.getElementById('voucher-text').innerText = selectedVoucher;
-
-            // Restore visibility
-            canvas.style.opacity = '1';
-            canvas.style.pointerEvents = 'auto';
-
-            // Draw scratch layer
-            ctx.globalCompositeOperation = 'source-over';
-
-            // Silver-grey gradient background
-            const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            grad.addColorStop(0, '#e0e0e0');
-            grad.addColorStop(0.3, '#f5f5f5');
-            grad.addColorStop(0.7, '#bdbdbd');
-            grad.addColorStop(1, '#9e9e9e');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Glitter gold dots
-            for (let i = 0; i < 200; i++) {
-                ctx.fillStyle = 'rgba(255, 105, 180, 0.25)';
-                ctx.beginPath();
-                ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 2.5, 0, Math.PI * 2);
-                ctx.fill();
+            /* DARK MODE TOGGLE */
+            function toggleDark() {
+                document.body.classList.toggle("dark");
+                const themeBtn = document.getElementById("theme-btn");
+                if (document.body.classList.contains("dark")) {
+                    themeBtn.innerHTML = "☀️";
+                } else {
+                    themeBtn.innerHTML = "🌙";
+                }
             }
 
-            // Instructions text on layer
-            ctx.font = "bold 15px 'Plus Jakarta Sans', sans-serif";
-            ctx.fillStyle = "#61242f";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText("Scratch to Reveal Date! ✨", canvas.width / 2, canvas.height / 2);
+            /* FLOATING HEARTS EFFECT */
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.className = "heart-float";
 
-            // Listeners for dragging/scratching
-            canvas.addEventListener('mousedown', startScratch);
-            canvas.addEventListener('mousemove', scratchMove);
-            canvas.addEventListener('mouseup', stopScratch);
-            canvas.addEventListener('mouseleave', stopScratch);
+                // Random hearts icon styling
+                const icons = ["❤️", "💖", "💝", "💕", "🌸"];
+                heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
 
-            canvas.addEventListener('touchstart', (e) => {
-                startScratch(e);
-                e.preventDefault();
-            }, { passive: false });
+                heart.style.left = Math.random() * 100 + "vw";
+                const size = Math.random() * 15 + 12; // size between 12px and 27px
+                heart.style.fontSize = size + "px";
+                heart.style.opacity = Math.random() * 0.5 + 0.4;
 
-            canvas.addEventListener('touchmove', (e) => {
-                scratchMove(e);
-                e.preventDefault();
-            }, { passive: false });
+                // Random float speed
+                const duration = Math.random() * 2.5 + 3.5; // between 3.5s and 6s
+                heart.style.animationDuration = duration + "s";
 
-            canvas.addEventListener('touchend', stopScratch);
-        }
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), duration * 1000);
+            }, 1200);
 
-        function getMousePos(e) {
-            const rect = canvas.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
-            };
-        }
-
-        function startScratch(e) {
-            isScratching = true;
-            scratchMove(e);
-        }
-
-        function scratchMove(e) {
-            if (!isScratching) return;
-            const pos = getMousePos(e);
-
-            ctx.globalCompositeOperation = 'destination-out';
-            ctx.beginPath();
-            ctx.arc(pos.x, pos.y, 22, 0, Math.PI * 2);
-            ctx.fill();
-
-            checkPercentCleared();
-        }
-
-        function stopScratch() {
-            isScratching = false;
-        }
-
-        function checkPercentCleared() {
-            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            let clearedCount = 0;
-            const totalPixels = imgData.data.length / 4;
-
-            for (let i = 3; i < imgData.data.length; i += 4) {
-                if (imgData.data[i] === 0) clearedCount++;
+            /* CONFETTI BURST */
+            function loveExplosion() {
+                confetti({
+                    particleCount: 150,
+                    spread: 80,
+                    origin: { y: 0.65 }
+                });
             }
 
-            const clearedPercent = (clearedCount / totalPixels) * 100;
+            /* ENVELOPE OPEN/CLOSE toggle */
+            function toggleEnvelope() {
+                const envelope = document.getElementById("loveEnvelope");
+                const prompt = document.getElementById("envelope-tip");
+                envelope.classList.toggle("open");
+                if (envelope.classList.contains("open")) {
+                    prompt.innerHTML = "<i class='fas fa-envelope'></i> Tap to Close Letter";
+                    loveExplosion();
+                } else {
+                    prompt.innerHTML = "<i class='fas fa-hand-pointer'></i> Tap to Open Letter";
+                }
+            }
 
-            if (clearedPercent > 45) { // If 45% cleared, fade out layer completely
-                canvas.style.transition = 'opacity 0.6s ease';
-                canvas.style.opacity = '0';
+            /* LOVE NOTE JAR MESSAGES */
+            const loveNotes = [
+                "You are my favorite distraction. 🥰",
+                "I fall in love with you all over again, every single day.",
+                "My favorite place in the world is right next to you. 🌎",
+                "You make my heart smile in ways nobody else can.",
+                "You are my peace, my home, and my favorite person.",
+                "Thank you for existing. My life is so much brighter with you in it.",
+                "I love your laugh, your smile, and the warmth you bring to my soul. ✨",
+                "No matter what happens, I will always choose you. 💖",
+                "You are the light of my world, my angel.",
+                "I love every single detail about you. Yes, even your quirks! 😉",
+                "Sending you a massive virtual hug and a million kisses. Muahhh! 😘",
+                "You represent everything I ever dreamed of.",
+                "My love for you grows with every sunrise. 🌅",
+                "You make the hard days completely worth it."
+            ];
+
+            function pullLoveNote() {
+                const jar = document.getElementById("loveJar");
+                const instruction = document.getElementById("jar-instruction");
+
+                jar.classList.add("shake");
+                instruction.innerHTML = "Opening love jar...";
+
                 setTimeout(() => {
-                    canvas.style.pointerEvents = 'none';
-                    // Celebration pop
-                    confetti({
-                        particleCount: 80,
-                        spread: 50,
-                        origin: { y: 0.8 }
-                    });
+                    jar.classList.remove("shake");
+                    const randomNote = loveNotes[Math.floor(Math.random() * loveNotes.length)];
+                    document.getElementById("loveNoteContent").innerText = randomNote;
+                    openModal('noteModal');
+                    instruction.innerHTML = "Tap to shake & open 💖";
                 }, 600);
             }
-        }
 
-        function resetScratchCard() {
-            initScratchCard();
-        }
+            /* SCRATCH-OFF CARD COMPONENT */
+            const vouchers = [
+                "A Romantic Candlelit Dinner cooked by me! 🍳",
+                "A Cozy Movie Marathon night with unlimited popcorn! 🍿",
+                "A Sweet Ice Cream Date & Sunset Walk! 🍦",
+                "A Relaxing Massage and Spa night at home! 💆‍♀️",
+                "A Shopping Spree voucher! 🛍️",
+                "A spontaneous weekend road trip to wherever! 🚗"
+            ];
 
-        // Initialize scratch-off on load
-        window.addEventListener('load', initScratchCard);
+            let canvas, ctx;
+            let isScratching = false;
 
+            function initScratchCard() {
+                canvas = document.getElementById('scratch-canvas');
+                ctx = canvas.getContext('2d');
 
-        /* MUSIC WIDGET CONTROLS */
-        const music = document.getElementById("bgMusic");
-        const musicWidget = document.getElementById("musicPlayer");
-        const playIcon = document.getElementById("playIcon");
+                // Randomly select voucher
+                const selectedVoucher = vouchers[Math.floor(Math.random() * vouchers.length)];
+                document.getElementById('voucher-text').innerText = selectedVoucher;
 
-        // Lower volume so it isn't deafening
-        music.volume = 0.45;
+                // Restore visibility
+                canvas.style.opacity = '1';
+                canvas.style.pointerEvents = 'auto';
 
-        function toggleMusic() {
-            if (music.paused) {
-                music.play()
-                    .then(() => {
-                        musicWidget.classList.add("playing");
-                        playIcon.innerHTML = "<i class='fas fa-pause'></i>";
-                    })
-                    .catch((err) => {
-                        console.log("Audio autoplay was prevented: ", err);
-                        alert("Please interact with the page first or check if browser permissions allow sound!");
-                    });
-            } else {
-                music.pause();
-                musicWidget.classList.remove("playing");
-                playIcon.innerHTML = "<i class='fas fa-play'></i>";
-            }
-        }
+                // Draw scratch layer
+                ctx.globalCompositeOperation = 'source-over';
 
-        /* MODAL UTILITIES */
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.style.display = "flex";
-            setTimeout(() => {
-                modal.classList.add("show");
-            }, 10);
-        }
+                // Silver-grey gradient background
+                const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                grad.addColorStop(0, '#e0e0e0');
+                grad.addColorStop(0.3, '#f5f5f5');
+                grad.addColorStop(0.7, '#bdbdbd');
+                grad.addColorStop(1, '#9e9e9e');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove("show");
-            setTimeout(() => {
-                modal.style.display = "none";
-            }, 300);
-        }
-
-        /* PROPOSAL LOGIC */
-        function dodgeNo() {
-            const btnNo = document.getElementById("btnNo");
-            const container = btnNo.parentElement;
-            const containerRect = container.getBoundingClientRect();
-            const btnRect = btnNo.getBoundingClientRect();
-            
-            // Calculate max ranges to keep the button inside the container bounds
-            const maxX = containerRect.width - btnRect.width;
-            const maxY = containerRect.height - btnRect.height;
-            
-            // Random positions
-            let randomX = Math.random() * maxX;
-            let randomY = (Math.random() * 2 - 1) * 40; // range of movement vertically
-            
-            // Constrain bounds
-            if (randomX < 0) randomX = 10;
-            if (randomX > maxX) randomX = maxX - 10;
-            
-            // Apply new position
-            btnNo.style.position = "absolute";
-            btnNo.style.left = randomX + "px";
-            btnNo.style.top = randomY + "px";
-            
-            // Make it slightly harder to click by shrinking it
-            const currentScale = parseFloat(btnNo.style.transform.replace(/[^\d.]/g, '')) || 1.0;
-            if (currentScale > 0.5) {
-                btnNo.style.transform = `scale(${currentScale - 0.1})`;
-            }
-        }
-
-        function proposeYes() {
-            // Trigger massive continuous confetti
-            const end = Date.now() + (6 * 1000); // 6 seconds of confetti
-            
-            (function frame() {
-                confetti({
-                    particleCount: 5,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 }
-                });
-                confetti({
-                    particleCount: 5,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 }
-                });
-                
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
+                // Glitter gold dots
+                for (let i = 0; i < 200; i++) {
+                    ctx.fillStyle = 'rgba(255, 105, 180, 0.25)';
+                    ctx.beginPath();
+                    ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 2.5, 0, Math.PI * 2);
+                    ctx.fill();
                 }
-            }());
 
-            openModal('proposalModal');
-        }
-    </script>
+                // Instructions text on layer
+                ctx.font = "bold 15px 'Plus Jakarta Sans', sans-serif";
+                ctx.fillStyle = "#61242f";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText("Scratch to Reveal Date! ✨", canvas.width / 2, canvas.height / 2);
+
+                // Listeners for dragging/scratching
+                canvas.addEventListener('mousedown', startScratch);
+                canvas.addEventListener('mousemove', scratchMove);
+                canvas.addEventListener('mouseup', stopScratch);
+                canvas.addEventListener('mouseleave', stopScratch);
+
+                canvas.addEventListener('touchstart', (e) => {
+                    startScratch(e);
+                    e.preventDefault();
+                }, { passive: false });
+
+                canvas.addEventListener('touchmove', (e) => {
+                    scratchMove(e);
+                    e.preventDefault();
+                }, { passive: false });
+
+                canvas.addEventListener('touchend', stopScratch);
+            }
+
+            function getMousePos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: clientX - rect.left,
+                    y: clientY - rect.top
+                };
+            }
+
+            function startScratch(e) {
+                isScratching = true;
+                scratchMove(e);
+            }
+
+            function scratchMove(e) {
+                if (!isScratching) return;
+                const pos = getMousePos(e);
+
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 22, 0, Math.PI * 2);
+                ctx.fill();
+
+                checkPercentCleared();
+            }
+
+            function stopScratch() {
+                isScratching = false;
+            }
+
+            function checkPercentCleared() {
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                let clearedCount = 0;
+                const totalPixels = imgData.data.length / 4;
+
+                for (let i = 3; i < imgData.data.length; i += 4) {
+                    if (imgData.data[i] === 0) clearedCount++;
+                }
+
+                const clearedPercent = (clearedCount / totalPixels) * 100;
+
+                if (clearedPercent > 45) { // If 45% cleared, fade out layer completely
+                    canvas.style.transition = 'opacity 0.6s ease';
+                    canvas.style.opacity = '0';
+                    setTimeout(() => {
+                        canvas.style.pointerEvents = 'none';
+                        // Celebration pop
+                        confetti({
+                            particleCount: 80,
+                            spread: 50,
+                            origin: { y: 0.8 }
+                        });
+                    }, 600);
+                }
+            }
+
+            function resetScratchCard() {
+                initScratchCard();
+            }
+
+            // Initialize components on load
+            window.addEventListener('load', () => {
+                initScratchCard();
+                initWheel();
+            });
+
+
+            /* MUSIC WIDGET CONTROLS */
+            const music = document.getElementById("bgMusic");
+            const musicWidget = document.getElementById("musicPlayer");
+            const playIcon = document.getElementById("playIcon");
+
+            // Lower volume so it isn't deafening
+            music.volume = 0.45;
+
+            function toggleMusic() {
+                if (music.paused) {
+                    music.play()
+                        .then(() => {
+                            musicWidget.classList.add("playing");
+                            playIcon.innerHTML = "<i class='fas fa-pause'></i>";
+                        })
+                        .catch((err) => {
+                            console.log("Audio autoplay was prevented: ", err);
+                            alert("Please interact with the page first or check if browser permissions allow sound!");
+                        });
+                } else {
+                    music.pause();
+                    musicWidget.classList.remove("playing");
+                    playIcon.innerHTML = "<i class='fas fa-play'></i>";
+                }
+            }
+
+            /* MODAL UTILITIES */
+            function openModal(modalId) {
+                const modal = document.getElementById(modalId);
+                modal.style.display = "flex";
+                setTimeout(() => {
+                    modal.classList.add("show");
+                }, 10);
+            }
+
+            function closeModal(modalId) {
+                const modal = document.getElementById(modalId);
+                modal.classList.remove("show");
+                setTimeout(() => {
+                    modal.style.display = "none";
+                }, 300);
+            }
+
+            /* PROPOSAL LOGIC */
+            function dodgeNo() {
+                const btnNo = document.getElementById("btnNo");
+                const container = btnNo.parentElement;
+                const containerRect = container.getBoundingClientRect();
+                const btnRect = btnNo.getBoundingClientRect();
+
+                // Calculate max ranges to keep the button inside the container bounds
+                const maxX = containerRect.width - btnRect.width;
+                const maxY = containerRect.height - btnRect.height;
+
+                // Random positions
+                let randomX = Math.random() * maxX;
+                let randomY = (Math.random() * 2 - 1) * 40; // range of movement vertically
+
+                // Constrain bounds
+                if (randomX < 0) randomX = 10;
+                if (randomX > maxX) randomX = maxX - 10;
+
+                // Apply new position
+                btnNo.style.position = "absolute";
+                btnNo.style.left = randomX + "px";
+                btnNo.style.top = randomY + "px";
+
+                // Make it slightly harder to click by shrinking it
+                const currentScale = parseFloat(btnNo.style.transform.replace(/[^\d.]/g, '')) || 1.0;
+                if (currentScale > 0.5) {
+                    btnNo.style.transform = `scale(${currentScale - 0.1})`;
+                }
+            }
+
+            function proposeYes() {
+                // Trigger massive continuous confetti
+                const end = Date.now() + (6 * 1000); // 6 seconds of confetti
+
+                (function frame() {
+                    confetti({
+                        particleCount: 5,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 }
+                    });
+                    confetti({
+                        particleCount: 5,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 }
+                    });
+
+                    if (Date.now() < end) {
+                        requestAnimationFrame(frame);
+                    }
+                }());
+
+                openModal('proposalModal');
+            }
+
+            /* WHEEL DECIDER LOGIC */
+            const dateOptions = [
+                { text: "Movie Night 🍿", color: "#ff477e" },
+                { text: "Ice Cream Date 🍦", color: "#ff7096" },
+                { text: "Cook Dinner 🍳", color: "#ff85a2" },
+                { text: "Spa Massage 💆‍♀️", color: "#f7a8b8" },
+                { text: "Fancy Dinner 🍷", color: "#ffccd5" },
+                { text: "All Night 🧺", color: "#ffc2d1" },
+                { text: "Game Night 🎮", color: "#ff85a2" }
+            ];
+
+            let wheelCanvas, wheelCtx;
+            let currentRotation = 0;
+            let isSpinning = false;
+
+            function initWheel() {
+                wheelCanvas = document.getElementById("wheelCanvas");
+                if (!wheelCanvas) return;
+                wheelCtx = wheelCanvas.getContext("2d");
+                drawWheel();
+            }
+
+            function drawWheel() {
+                const size = wheelCanvas.width;
+                const center = size / 2;
+                const radius = center - 5;
+                const sliceAngle = (2 * Math.PI) / dateOptions.length;
+
+                wheelCtx.clearRect(0, 0, size, size);
+
+                dateOptions.forEach((option, i) => {
+                    const startAngle = i * sliceAngle;
+                    const endAngle = startAngle + sliceAngle;
+
+                    // Draw sector
+                    wheelCtx.beginPath();
+                    wheelCtx.moveTo(center, center);
+                    wheelCtx.arc(center, center, radius, startAngle, endAngle);
+                    wheelCtx.fillStyle = option.color;
+                    wheelCtx.fill();
+                    wheelCtx.lineWidth = 2;
+                    wheelCtx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+                    wheelCtx.stroke();
+
+                    // Draw text
+                    wheelCtx.save();
+                    wheelCtx.translate(center, center);
+                    wheelCtx.rotate(startAngle + sliceAngle / 2);
+                    wheelCtx.textAlign = "right";
+                    wheelCtx.fillStyle = "#4a1c24";
+                    wheelCtx.font = "bold 12px 'Plus Jakarta Sans', sans-serif";
+                    wheelCtx.fillText(option.text, radius - 15, 5);
+                    wheelCtx.restore();
+                });
+
+                // Outer white ring
+                wheelCtx.beginPath();
+                wheelCtx.arc(center, center, radius, 0, 2 * Math.PI);
+                wheelCtx.lineWidth = 4;
+                wheelCtx.strokeStyle = "#ffffff";
+                wheelCtx.stroke();
+            }
+
+            function spinWheel() {
+                if (isSpinning) return;
+                isSpinning = true;
+                document.getElementById("wheel-result").innerText = "Spinning...";
+
+                // Determine dynamic rotation
+                const spins = 5 + Math.floor(Math.random() * 5); // 5 to 9 full spins
+                const degrees = spins * 360 + Math.floor(Math.random() * 360);
+                currentRotation += degrees;
+
+                // Apply style rotation transition
+                wheelCanvas.style.transform = `rotate(${currentRotation}deg)`;
+
+                // Calculate selected item when transition finishes
+                setTimeout(() => {
+                    isSpinning = false;
+
+                    // Normalise angle to positive 0-360 range
+                    const normalizedAngle = (360 - (currentRotation % 360)) % 360;
+
+                    // Pointer is at top (-90 degrees or 270 degrees in canvas math)
+                    // Shift calculations by 90 degrees to match the top pointer
+                    const pointerAdjustedAngle = (normalizedAngle + 270) % 360;
+                    const sliceDegrees = 360 / dateOptions.length;
+                    const selectedIndex = Math.floor(pointerAdjustedAngle / sliceDegrees) % dateOptions.length;
+                    const chosenOption = dateOptions[selectedIndex].text;
+
+                    document.getElementById("wheel-result").innerText = `Let's do: ${chosenOption}! 🎉`;
+
+                    // Pop some confetti
+                    confetti({
+                        particleCount: 70,
+                        spread: 60,
+                        origin: { y: 0.8 }
+                    });
+                }, 4000); // matches the CSS transition length
+            }
+        </script>
 </body>
 
 </html>
