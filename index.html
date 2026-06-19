@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>For My Queen ❤️</title>
 
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <!-- Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -28,7 +31,7 @@
             --accent-light: rgba(255, 71, 126, 0.15);
             --shadow: 0 8px 32px 0 rgba(255, 182, 193, 0.35);
             --inner-glow: inset 0 2px 5px rgba(255, 255, 255, 0.4);
-            
+
             --font-sans: 'Plus Jakarta Sans', sans-serif;
             --font-serif: 'Playfair Display', serif;
             --font-hand: 'Caveat', cursive;
@@ -63,26 +66,38 @@
             min-height: 100vh;
             transition: background 0.5s ease, color 0.5s ease;
             overflow-x: hidden;
-            padding-bottom: 100px; /* Space for music player */
+            padding-bottom: 100px;
+            /* Space for music player */
         }
 
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         /* CUSTOM SCROLLBAR */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.1);
         }
+
         ::-webkit-scrollbar-thumb {
             background: var(--accent);
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: var(--accent-hover);
         }
@@ -144,8 +159,15 @@
         }
 
         @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
         }
 
         h1 {
@@ -269,7 +291,7 @@
             box-sizing: border-box;
             transition: transform 0.4s ease, z-index 0.1s, height 0.4s ease, width 0.4s ease, left 0.4s ease;
             z-index: 2;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
             color: #3e2723;
             font-family: var(--font-hand);
             font-size: 1.35rem;
@@ -322,9 +344,22 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-5px); }
-            60% { transform: translateY(-3px); }
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-5px);
+            }
+
+            60% {
+                transform: translateY(-3px);
+            }
         }
 
         /* REASONS LIST */
@@ -406,7 +441,8 @@
             left: 0;
             cursor: pointer;
             z-index: 2;
-            touch-action: none; /* Prevents scrolling when scratching on mobile */
+            touch-action: none;
+            /* Prevents scrolling when scratching on mobile */
         }
 
         .scratch-btn-container {
@@ -460,9 +496,21 @@
         }
 
         @keyframes jarShake {
-            0%, 100% { transform: rotate(0); }
-            20%, 60% { transform: rotate(-8deg); }
-            40%, 80% { transform: rotate(8deg); }
+
+            0%,
+            100% {
+                transform: rotate(0);
+            }
+
+            20%,
+            60% {
+                transform: rotate(-8deg);
+            }
+
+            40%,
+            80% {
+                transform: rotate(8deg);
+            }
         }
 
         /* SVG Jar Graphics styling */
@@ -479,8 +527,13 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.9); }
-            100% { transform: scale(1.1); }
+            0% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1.1);
+            }
         }
 
         .jar-prompt-text {
@@ -572,37 +625,6 @@
             word-wrap: break-word;
         }
 
-        /* COUNTDOWN COMPONENT */
-        .countdown-display {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .countdown-segment {
-            flex: 1;
-            background: var(--accent-light);
-            border-radius: 16px;
-            padding: 12px 8px;
-            text-align: center;
-            border: 1px solid var(--card-border);
-        }
-
-        .countdown-num {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--accent);
-            display: block;
-        }
-
-        .countdown-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
 
         /* RELATIONSHIP TIMELINE */
         .timeline-section {
@@ -783,14 +805,30 @@
             animation: bounceBar 0.8s ease infinite alternate;
         }
 
-        .music-widget.playing .bar:nth-child(2) { animation-delay: 0.15s; }
-        .music-widget.playing .bar:nth-child(3) { animation-delay: 0.3s; }
-        .music-widget.playing .bar:nth-child(4) { animation-delay: 0.45s; }
-        .music-widget.playing .bar:nth-child(5) { animation-delay: 0.2s; }
+        .music-widget.playing .bar:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .music-widget.playing .bar:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .music-widget.playing .bar:nth-child(4) {
+            animation-delay: 0.45s;
+        }
+
+        .music-widget.playing .bar:nth-child(5) {
+            animation-delay: 0.2s;
+        }
 
         @keyframes bounceBar {
-            0% { height: 2px; }
-            100% { height: 18px; }
+            0% {
+                height: 2px;
+            }
+
+            100% {
+                height: 18px;
+            }
         }
 
         /* FLOATING HEARTS BACKGROUND */
@@ -808,6 +846,7 @@
                 transform: translateY(105vh) scale(0.5) rotate(0deg);
                 opacity: 0.8;
             }
+
             to {
                 transform: translateY(-10vh) scale(1.2) rotate(360deg);
                 opacity: 0;
@@ -818,8 +857,10 @@
         .modal {
             display: none;
             position: fixed;
-            top:0; left:0;
-            width:100%; height:100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(15, 10, 21, 0.5);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
@@ -875,7 +916,7 @@
             background: #fffdf5;
             padding: 20px;
             border-radius: 12px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.05);
             border: 1px solid #e8e3d3;
             margin: 15px 0 25px;
             line-height: 1.3;
@@ -887,25 +928,31 @@
             h1 {
                 font-size: 2.3rem;
             }
+
             .envelope-wrapper.open .envelope-paper {
                 width: 290px;
                 left: 15px;
             }
+
             .timeline-section::before {
                 left: 20px;
             }
+
             .timeline-block {
                 flex-direction: column;
                 align-items: flex-start;
                 margin: 25px 0;
             }
+
             .timeline-block:nth-child(even) {
                 flex-direction: column;
             }
+
             .timeline-pointer {
                 left: 20px;
                 transform: translateX(-50%);
             }
+
             .timeline-content {
                 width: calc(100% - 40px);
                 margin-left: 40px;
@@ -937,29 +984,34 @@
         <!-- CORE CARD 1: THE INTERACTIVE LOVE LETTER -->
         <div class="card">
             <h2><i class="fas fa-envelope-open-text"></i> A Special Letter</h2>
-            <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 20px;">Click the envelope flap to reveal my letter for you.</p>
-            
+            <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 20px;">Click the envelope flap to
+                reveal my letter for you.</p>
+
             <div class="envelope-section">
                 <div class="envelope-wrapper" id="loveEnvelope" onclick="toggleEnvelope()">
                     <div class="envelope-flap"></div>
                     <div class="envelope-paper">
                         <!-- PRESERVED SENTIMENTAL LOVE LETTER -->
                         <p style="margin-top: 0;">My Angel Juanita,</p>
-                        <p>I wanted to build something real to show you how much I appreciate having you in my life. You make the good days better and the hard days completely worth it.</p>
-                        <p>Thank you for being my peace, my laughter, and my favorite person to share everything with.</p>
+                        <p>I wanted to build something real to show you how much I appreciate having you in my life. You
+                            make the good days better and the hard days completely worth it.</p>
+                        <p>Thank you for being my peace, my laughter, and my favorite person to share everything with.
+                        </p>
                         <p style="text-align: right; margin-bottom: 0;">Yours forever, ❤️</p>
                     </div>
                     <div class="envelope-front"></div>
                 </div>
-                <div class="envelope-prompt" id="envelope-tip"><i class="fas fa-hand-pointer"></i> Tap to Open Letter</div>
+                <div class="envelope-prompt" id="envelope-tip"><i class="fas fa-hand-pointer"></i> Tap to Open Letter
+                </div>
             </div>
         </div>
 
         <!-- CORE CARD 2: SCRATCH CARD DATES -->
         <div class="card">
             <h2><i class="fas fa-ticket-alt"></i> Date Night Scratch-Off</h2>
-            <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 20px;">Use your mouse or finger to scratch off the gold layer and reveal your date ticket!</p>
-            
+            <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 20px;">Use your mouse or finger
+                to scratch off the gold layer and reveal your date ticket!</p>
+
             <div class="scratch-container">
                 <div class="scratch-voucher">
                     <h4>🎫 RELATIONSHIP VOUCHER</h4>
@@ -967,7 +1019,7 @@
                 </div>
                 <canvas id="scratch-canvas" width="300" height="160"></canvas>
             </div>
-            
+
             <div class="scratch-btn-container">
                 <button class="btn-action" onclick="resetScratchCard()">Get Another Ticket 🎟️</button>
             </div>
@@ -976,8 +1028,9 @@
         <!-- CORE CARD 3: LOVE NOTE JAR -->
         <div class="card">
             <h2><i class="fas fa-jar"></i> The Little Love Jar</h2>
-            <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 15px;">Tap the jar to retrieve a handwritten sweet note or compliment.</p>
-            
+            <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 15px;">Tap the jar to retrieve a
+                handwritten sweet note or compliment.</p>
+
             <div class="jar-container">
                 <div class="love-jar" id="loveJar" onclick="pullLoveNote()">
                     <!-- SVG Glass Jar -->
@@ -986,56 +1039,35 @@
                         <rect x="30" y="5" width="40" height="10" rx="3" fill="#8d6e63" />
                         <rect x="26" y="15" width="48" height="6" rx="2" fill="#a1887f" />
                         <!-- Jar neck -->
-                        <path d="M 33 21 L 67 21 L 67 30 L 33 30 Z" fill="rgba(250, 250, 250, 0.4)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+                        <path d="M 33 21 L 67 21 L 67 30 L 33 30 Z" fill="rgba(250, 250, 250, 0.4)"
+                            stroke="rgba(255,255,255,0.6)" stroke-width="1.5" />
                         <!-- Ribbon/String around neck -->
                         <rect x="31" y="24" width="38" height="3" fill="var(--accent)" />
                         <!-- Jar body -->
-                        <path d="M 33 30 C 20 30 15 45 15 65 C 15 95 25 120 35 120 L 65 120 C 75 120 85 95 85 65 C 85 45 80 30 67 30 Z" fill="rgba(255, 255, 255, 0.25)" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+                        <path
+                            d="M 33 30 C 20 30 15 45 15 65 C 15 95 25 120 35 120 L 65 120 C 75 120 85 95 85 65 C 85 45 80 30 67 30 Z"
+                            fill="rgba(255, 255, 255, 0.25)" stroke="rgba(255,255,255,0.7)" stroke-width="2" />
                         <!-- Shimmer highlight -->
-                        <path d="M 22 45 C 18 55 18 80 25 105" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="3" stroke-linecap="round" />
+                        <path d="M 22 45 C 18 55 18 80 25 105" fill="none" stroke="rgba(255,255,255,0.5)"
+                            stroke-width="3" stroke-linecap="round" />
                         <!-- Floating Heart in Jar -->
-                        <path class="jar-heart" d="M 50 78 C 50 78 40 68 40 58 C 40 50 48 50 50 55 C 52 50 60 50 60 58 C 60 68 50 78 50 78 Z" />
+                        <path class="jar-heart"
+                            d="M 50 78 C 50 78 40 68 40 58 C 40 50 48 50 50 55 C 52 50 60 50 60 58 C 60 68 50 78 50 78 Z" />
                     </svg>
                 </div>
                 <div class="jar-prompt-text" id="jar-instruction">Tap to shake & open 💖</div>
             </div>
         </div>
 
-        <!-- CORE CARD 4: COUNTDOWN TIMER -->
-        <div class="card">
-            <h2><i class="fas fa-clock"></i> Counting Down</h2>
-            <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 20px;">Every single second is precious. Countdown to our next special moment:</p>
-            
-            <div id="countdown-event-title" style="font-weight: 700; color: var(--accent); text-align: center; margin-bottom: 10px; font-size: 1.05rem;">Our Next Reunion ✈️</div>
-            
-            <div class="countdown-display">
-                <div class="countdown-segment">
-                    <span class="countdown-num" id="cd-days">00</span>
-                    <span class="countdown-label">Days</span>
-                </div>
-                <div class="countdown-segment">
-                    <span class="countdown-num" id="cd-hours">00</span>
-                    <span class="countdown-label">Hrs</span>
-                </div>
-                <div class="countdown-segment">
-                    <span class="countdown-num" id="cd-mins">00</span>
-                    <span class="countdown-label">Mins</span>
-                </div>
-                <div class="countdown-segment">
-                    <span class="countdown-num" id="cd-secs">00</span>
-                    <span class="countdown-label">Secs</span>
-                </div>
-            </div>
-            <p style="font-size: 0.75rem; text-align: center; color: var(--text-secondary); margin-top: 15px; margin-bottom: 0;">Target Date: October 24, 2026 (Anniversary)</p>
-        </div>
 
     </div> <!-- End grid container -->
 
     <!-- PRESERVED & REDESIGNED REASONS SECTION -->
     <div class="card" style="margin-top: 40px;">
         <h2><i class="fas fa-heart"></i> Why I Love You</h2>
-        <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 25px;">A few little reminders of why you are my whole world:</p>
-        
+        <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 25px;">A few little reminders of why
+            you are my whole world:</p>
+
         <div class="reasons-list">
             <!-- REASON 1 -->
             <div class="reason-item">
@@ -1078,8 +1110,9 @@
     <!-- POLAROID GALLERY SECTION -->
     <div class="card">
         <h2><i class="fas fa-images"></i> Visual Memory Lane</h2>
-        <p style="font-size: 0.92rem; color: var(--text-secondary);">Hover or tap on our polaroids. Replace these placeholders with your real photos inside the project files!</p>
-        
+        <p style="font-size: 0.92rem; color: var(--text-secondary);">Hover or tap on our polaroids to relive our
+            beautiful moments together.</p>
+
         <div class="polaroid-gallery">
             <!-- Featured generated image -->
             <div class="polaroid" style="--rotation: -3deg;">
@@ -1088,40 +1121,36 @@
                 </div>
                 <div class="polaroid-caption">Where our hearts aligned ✨</div>
             </div>
-            <!-- Placeholder 2 -->
-            <div class="polaroid" style="--rotation: 2deg;" onclick="alert('Place a local photo in the project directory, and replace image source in index.html to view your real photo!')">
+            <!-- Polaroid 2 -->
+            <div class="polaroid" style="--rotation: 2deg;">
                 <div class="polaroid-img-container">
-                    <div class="polaroid-placeholder pink-grad">
-                        <i class="fas fa-heart"></i>
-                        <span>Click to add photo reference</span>
-                    </div>
+                    <img src="Juanita 1.JPG" alt="Juanita 1">
                 </div>
-                <div class="polaroid-caption">Our favorite date night 🍕</div>
+                <div class="polaroid-caption">Too hot for the planet 🍕</div>
             </div>
-            <!-- Placeholder 3 -->
-            <div class="polaroid" style="--rotation: -1deg;" onclick="alert('Place a local photo in the project directory, and replace image source in index.html to view your real photo!')">
+            <!-- Polaroid 3 -->
+            <div class="polaroid" style="--rotation: -1deg;">
                 <div class="polaroid-img-container">
-                    <div class="polaroid-placeholder blue-grad">
-                        <i class="fas fa-camera"></i>
-                        <span>Click to add photo reference</span>
-                    </div>
+                    <img src="Juanita 2.JPG" alt="Juanita 2">
                 </div>
-                <div class="polaroid-caption">Sweetest memories 📸</div>
+                <div class="polaroid-caption">Hottest Baby 📸</div>
             </div>
         </div>
     </div>
 
     <!-- RELATIONSHIP MILESTONES TIMELINE -->
     <div class="timeline-section">
-        <h2 style="justify-content: center; margin-bottom: 40px; font-family: var(--font-serif);"><i class="fas fa-route" style="color: var(--accent);"></i> Our Journey So Far</h2>
+        <h2 style="justify-content: center; margin-bottom: 40px; font-family: var(--font-serif);"><i
+                class="fas fa-route" style="color: var(--accent);"></i> Our Journey So Far</h2>
 
         <!-- Milestone 1 -->
         <div class="timeline-block">
             <div class="timeline-pointer"><i class="fas fa-map-marker-alt"></i></div>
             <div class="timeline-content">
-                <span class="timeline-date">August 12, 2024</span>
-                <h3 class="timeline-title">The First Day 📍</h3>
-                <p class="timeline-desc">The moment our paths crossed and my world began to change for the better. A day I will hold in my heart forever.</p>
+                <span class="timeline-date">March 14, 2026</span>
+                <h3 class="timeline-title">The First Day(My birthday) 📍</h3>
+                <p class="timeline-desc">The moment our paths crossed and my world began to change for the better. A day
+                    I will hold in my heart forever.</p>
             </div>
         </div>
 
@@ -1130,8 +1159,9 @@
             <div class="timeline-pointer"><i class="fas fa-mug-hot"></i></div>
             <div class="timeline-content">
                 <span class="timeline-date">September 05, 2024</span>
-                <h3 class="timeline-title">Our First Date ☕</h3>
-                <p class="timeline-desc">Laughter, nervous smiles, and that instant connection that made me realize you were someone incredibly special.</p>
+                <h3 class="timeline-title">Our First Ice Cream Date ☕</h3>
+                <p class="timeline-desc">I saw the nervousness in your eyes you know. You were blushing really hard. I
+                    just wanted to hug you really tight. </p>
             </div>
         </div>
 
@@ -1139,21 +1169,14 @@
         <div class="timeline-block">
             <div class="timeline-pointer"><i class="fas fa-heart"></i></div>
             <div class="timeline-content">
-                <span class="timeline-date">October 24, 2024</span>
-                <h3 class="timeline-title">Making It Official 💖</h3>
-                <p class="timeline-desc">The day we decided to walk this life together. Best decision I have ever made.</p>
+                <span class="timeline-date">April 3, 2026</span>
+                <h3 class="timeline-title">Prayer Dine 💖</h3>
+                <p class="timeline-desc">The first time we spent soo much time together. I remember walking you to get a
+                    car while we spoke. I remember the spark that was in your eyes.</p>
             </div>
         </div>
 
-        <!-- Milestone 4 -->
-        <div class="timeline-block">
-            <div class="timeline-pointer"><i class="fas fa-plane"></i></div>
-            <div class="timeline-content">
-                <span class="timeline-date">December 20, 2025</span>
-                <h3 class="timeline-title">Our First Trip ✈️</h3>
-                <p class="timeline-desc">Sharing adventures, exploring new spaces, and realizing you are my favorite home wherever we go.</p>
-            </div>
-        </div>
+
     </div>
 
     <!-- FLOATING MUSIC PLAYER -->
@@ -1219,20 +1242,20 @@
         setInterval(() => {
             const heart = document.createElement("div");
             heart.className = "heart-float";
-            
+
             // Random hearts icon styling
             const icons = ["❤️", "💖", "💝", "💕", "🌸"];
             heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-            
+
             heart.style.left = Math.random() * 100 + "vw";
             const size = Math.random() * 15 + 12; // size between 12px and 27px
             heart.style.fontSize = size + "px";
             heart.style.opacity = Math.random() * 0.5 + 0.4;
-            
+
             // Random float speed
             const duration = Math.random() * 2.5 + 3.5; // between 3.5s and 6s
             heart.style.animationDuration = duration + "s";
-            
+
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), duration * 1000);
         }, 1200);
@@ -1280,10 +1303,10 @@
         function pullLoveNote() {
             const jar = document.getElementById("loveJar");
             const instruction = document.getElementById("jar-instruction");
-            
+
             jar.classList.add("shake");
             instruction.innerHTML = "Opening love jar...";
-            
+
             setTimeout(() => {
                 jar.classList.remove("shake");
                 const randomNote = loveNotes[Math.floor(Math.random() * loveNotes.length)];
@@ -1302,25 +1325,25 @@
             "A Shopping Spree voucher! 🛍️",
             "A spontaneous weekend road trip to wherever! 🚗"
         ];
-        
+
         let canvas, ctx;
         let isScratching = false;
 
         function initScratchCard() {
             canvas = document.getElementById('scratch-canvas');
             ctx = canvas.getContext('2d');
-            
+
             // Randomly select voucher
             const selectedVoucher = vouchers[Math.floor(Math.random() * vouchers.length)];
             document.getElementById('voucher-text').innerText = selectedVoucher;
-            
+
             // Restore visibility
             canvas.style.opacity = '1';
             canvas.style.pointerEvents = 'auto';
-            
+
             // Draw scratch layer
             ctx.globalCompositeOperation = 'source-over';
-            
+
             // Silver-grey gradient background
             const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
             grad.addColorStop(0, '#e0e0e0');
@@ -1329,7 +1352,7 @@
             grad.addColorStop(1, '#9e9e9e');
             ctx.fillStyle = grad;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
+
             // Glitter gold dots
             for (let i = 0; i < 200; i++) {
                 ctx.fillStyle = 'rgba(255, 105, 180, 0.25)';
@@ -1337,7 +1360,7 @@
                 ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 2.5, 0, Math.PI * 2);
                 ctx.fill();
             }
-            
+
             // Instructions text on layer
             ctx.font = "bold 15px 'Plus Jakarta Sans', sans-serif";
             ctx.fillStyle = "#61242f";
@@ -1350,17 +1373,17 @@
             canvas.addEventListener('mousemove', scratchMove);
             canvas.addEventListener('mouseup', stopScratch);
             canvas.addEventListener('mouseleave', stopScratch);
-            
+
             canvas.addEventListener('touchstart', (e) => {
                 startScratch(e);
                 e.preventDefault();
             }, { passive: false });
-            
+
             canvas.addEventListener('touchmove', (e) => {
                 scratchMove(e);
                 e.preventDefault();
             }, { passive: false });
-            
+
             canvas.addEventListener('touchend', stopScratch);
         }
 
@@ -1382,12 +1405,12 @@
         function scratchMove(e) {
             if (!isScratching) return;
             const pos = getMousePos(e);
-            
+
             ctx.globalCompositeOperation = 'destination-out';
             ctx.beginPath();
             ctx.arc(pos.x, pos.y, 22, 0, Math.PI * 2);
             ctx.fill();
-            
+
             checkPercentCleared();
         }
 
@@ -1399,13 +1422,13 @@
             const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             let clearedCount = 0;
             const totalPixels = imgData.data.length / 4;
-            
+
             for (let i = 3; i < imgData.data.length; i += 4) {
                 if (imgData.data[i] === 0) clearedCount++;
             }
-            
+
             const clearedPercent = (clearedCount / totalPixels) * 100;
-            
+
             if (clearedPercent > 45) { // If 45% cleared, fade out layer completely
                 canvas.style.transition = 'opacity 0.6s ease';
                 canvas.style.opacity = '0';
@@ -1428,36 +1451,6 @@
         // Initialize scratch-off on load
         window.addEventListener('load', initScratchCard);
 
-        /* COUNTDOWN TIMER LOGIC */
-        // Change targetDate to whatever milestone you want!
-        const targetDate = new Date("October 24, 2026 00:00:00").getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const difference = targetDate - now;
-
-            if (difference < 0) {
-                document.getElementById("cd-days").innerText = "00";
-                document.getElementById("cd-hours").innerText = "00";
-                document.getElementById("cd-mins").innerText = "00";
-                document.getElementById("cd-secs").innerText = "00";
-                document.getElementById("countdown-event-title").innerText = "Happy Anniversary! 💖";
-                return;
-            }
-
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-            document.getElementById("cd-days").innerText = days < 10 ? "0" + days : days;
-            document.getElementById("cd-hours").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("cd-mins").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("cd-secs").innerText = seconds < 10 ? "0" + seconds : seconds;
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
 
         /* MUSIC WIDGET CONTROLS */
         const music = document.getElementById("bgMusic");
@@ -1503,4 +1496,5 @@
         }
     </script>
 </body>
+
 </html>
