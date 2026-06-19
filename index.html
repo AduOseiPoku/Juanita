@@ -1337,8 +1337,8 @@
                 <i class="fas fa-play"></i>
             </button>
             <div class="music-info">
-                <div class="music-title">Acoustic Love Song</div>
-                <div class="music-artist">Instrumental Romance</div>
+                <div class="music-title">Forest</div>
+                <div class="music-artist">Fancy Hagood</div>
             </div>
             <div class="visualizer">
                 <div class="bar"></div>
@@ -1349,11 +1349,8 @@
             </div>
         </div>
 
-        <!-- AUDIO ELEMENT -->
-        <audio id="bgMusic" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
+        <!-- HIDDEN YOUTUBE PLAYER CONTAINER -->
+        <div id="ytPlayer" style="position: absolute; width: 0; height: 0; pointer-events: none; opacity: 0;"></div>
 
         <!-- POPUP MODALS -->
         <!-- Note Modal -->
@@ -1624,29 +1621,61 @@
             });
 
 
-            /* MUSIC WIDGET CONTROLS */
-            const music = document.getElementById("bgMusic");
+            /* MUSIC WIDGET CONTROLS WITH YOUTUBE PLAYER API */
             const musicWidget = document.getElementById("musicPlayer");
             const playIcon = document.getElementById("playIcon");
+            let player;
+            let isPlaying = false;
 
-            // Lower volume so it isn't deafening
-            music.volume = 0.45;
+            // Load YouTube Iframe Player API
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-            function toggleMusic() {
-                if (music.paused) {
-                    music.play()
-                        .then(() => {
-                            musicWidget.classList.add("playing");
-                            playIcon.innerHTML = "<i class='fas fa-pause'></i>";
-                        })
-                        .catch((err) => {
-                            console.log("Audio autoplay was prevented: ", err);
-                            alert("Please interact with the page first or check if browser permissions allow sound!");
-                        });
+            window.onYouTubeIframeAPIReady = function() {
+                player = new YT.Player('ytPlayer', {
+                    height: '0',
+                    width: '0',
+                    videoId: 'DRRUDgq4T2g',
+                    playerVars: {
+                        'autoplay': 0,
+                        'loop': 1,
+                        'playlist': 'DRRUDgq4T2g',
+                        'controls': 0,
+                        'showinfo': 0,
+                        'rel': 0
+                    },
+                    events: {
+                        'onReady': (event) => {
+                            event.target.setVolume(45); // Safe volume level
+                        },
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            }
+
+            function onPlayerStateChange(event) {
+                if (event.data == YT.PlayerState.PLAYING) {
+                    isPlaying = true;
+                    musicWidget.classList.add("playing");
+                    playIcon.innerHTML = "<i class='fas fa-pause'></i>";
                 } else {
-                    music.pause();
+                    isPlaying = false;
                     musicWidget.classList.remove("playing");
                     playIcon.innerHTML = "<i class='fas fa-play'></i>";
+                }
+            }
+
+            function toggleMusic() {
+                if (!player || typeof player.playVideo !== 'function') {
+                    console.log("YouTube Player is not fully ready.");
+                    return;
+                }
+                if (isPlaying) {
+                    player.pauseVideo();
+                } else {
+                    player.playVideo();
                 }
             }
 
