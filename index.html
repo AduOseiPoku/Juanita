@@ -882,9 +882,29 @@
             transform: scale(1.08);
         }
 
+        .music-next-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, color 0.2s;
+            padding: 0 4px;
+        }
+
+        .music-next-btn:hover {
+            transform: scale(1.1);
+            color: var(--accent-hover);
+        }
+
         .music-info {
             display: flex;
             flex-direction: column;
+            min-width: 0;
+            flex-grow: 1;
         }
 
         .music-title {
@@ -894,7 +914,8 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            width: 140px;
+            width: auto;
+            max-width: 130px;
         }
 
         .music-artist {
@@ -1108,6 +1129,19 @@
                 left: 15px;
                 padding: 6px 14px 6px 6px;
                 max-width: 240px;
+            }
+
+            .music-info {
+                max-width: 100px;
+            }
+
+            .music-title {
+                width: 100%;
+                font-size: 0.75rem;
+            }
+
+            .music-artist {
+                font-size: 0.65rem;
             }
 
             .polaroid-gallery {
@@ -1423,6 +1457,9 @@
             <button class="music-play-btn" onclick="toggleMusic()" id="playIcon">
                 <i class="fas fa-play"></i>
             </button>
+            <button class="music-next-btn" onclick="nextSong()" title="Next Song">
+                <i class="fas fa-step-forward"></i>
+            </button>
             <div class="music-info">
                 <div class="music-title">Forest</div>
                 <div class="music-artist">Fancy Hagood</div>
@@ -1714,6 +1751,13 @@
             let player;
             let isPlaying = false;
 
+            const playlist = [
+                { title: "Forest", artist: "Fancy Hagood", id: "DRRUDgq4T2g" },
+                { title: "Die With A Smile", artist: "Bruno Mars & Lady Gaga", id: "kPa7dyDXgqk" },
+                { title: "Perfect", artist: "Ed Sheeran", id: "2Vv-BfVoq4g" }
+            ];
+            let currentSongIndex = 0;
+
             // Load YouTube Iframe Player API
             const tag = document.createElement('script');
             tag.src = "https://www.youtube.com/iframe_api";
@@ -1724,11 +1768,10 @@
                 player = new YT.Player('ytPlayer', {
                     height: '0',
                     width: '0',
-                    videoId: 'DRRUDgq4T2g',
+                    videoId: playlist[0].id,
                     playerVars: {
                         'autoplay': 0,
-                        'loop': 1,
-                        'playlist': 'DRRUDgq4T2g',
+                        'loop': 0,
                         'controls': 0,
                         'showinfo': 0,
                         'rel': 0
@@ -1747,11 +1790,29 @@
                     isPlaying = true;
                     musicWidget.classList.add("playing");
                     playIcon.innerHTML = "<i class='fas fa-pause'></i>";
+                } else if (event.data == YT.PlayerState.ENDED) {
+                    nextSong();
                 } else {
-                    isPlaying = false;
-                    musicWidget.classList.remove("playing");
-                    playIcon.innerHTML = "<i class='fas fa-play'></i>";
+                    if (event.data == YT.PlayerState.PAUSED) {
+                        isPlaying = false;
+                        musicWidget.classList.remove("playing");
+                        playIcon.innerHTML = "<i class='fas fa-play'></i>";
+                    }
                 }
+            }
+
+            function nextSong() {
+                if (!player || typeof player.loadVideoById !== 'function') return;
+                currentSongIndex = (currentSongIndex + 1) % playlist.length;
+                const song = playlist[currentSongIndex];
+                
+                document.querySelector(".music-title").innerText = song.title;
+                document.querySelector(".music-artist").innerText = song.artist;
+                
+                player.loadVideoById(song.id);
+                isPlaying = true;
+                musicWidget.classList.add("playing");
+                playIcon.innerHTML = "<i class='fas fa-pause'></i>";
             }
 
             function toggleMusic() {
