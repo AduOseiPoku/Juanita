@@ -228,10 +228,10 @@
         .grid-container {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+            gap: 20px;
         }
 
         .grid-container .card {
@@ -1043,13 +1043,40 @@
 
         /* RESPONSIVE MEDIA QUERIES */
         @media (max-width: 768px) {
+            header {
+                padding: 60px 15px 30px;
+            }
+
             h1 {
-                font-size: 2.3rem;
+                font-size: 2.2rem;
+            }
+
+            .card {
+                padding: 25px 20px;
+                margin: 20px auto;
+                border-radius: 20px;
+            }
+
+            .envelope-wrapper {
+                transform: scale(0.9);
+                transform-origin: top center;
+                margin: 40px auto 20px;
             }
 
             .envelope-wrapper.open .envelope-paper {
                 width: 290px;
                 left: 15px;
+                height: 250px;
+            }
+
+            .scratch-container {
+                transform: scale(0.9);
+                transform-origin: center;
+            }
+
+            .wheel-container {
+                transform: scale(0.9);
+                transform-origin: center;
             }
 
             .timeline-section::before {
@@ -1074,6 +1101,66 @@
             .timeline-content {
                 width: calc(100% - 40px);
                 margin-left: 40px;
+            }
+
+            .music-widget {
+                bottom: 15px;
+                left: 15px;
+                padding: 6px 14px 6px 6px;
+                max-width: 240px;
+            }
+
+            .polaroid-gallery {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .card {
+                padding: 20px 15px;
+            }
+
+            .envelope-wrapper {
+                transform: scale(0.75);
+            }
+
+            .scratch-container {
+                transform: scale(0.8);
+            }
+
+            .wheel-container {
+                transform: scale(0.8);
+            }
+
+            .topbar {
+                top: 10px;
+                right: 10px;
+            }
+
+            .btn-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .proposal-buttons {
+                flex-direction: column;
+                gap: 10px;
+                height: auto;
+            }
+
+            .btn-proposal-no {
+                position: relative !important;
+                left: 0 !important;
+                top: 0 !important;
             }
         }
     </style>
@@ -1266,21 +1353,21 @@
                 <!-- Featured generated image -->
                 <div class="polaroid" style="--rotation: -3deg;">
                     <div class="polaroid-img-container">
-                        <img src="romantic_sunset.png" alt="Couple Silhouette">
+                        <img src="Juanita5.jpg" alt="Couple Silhouette">
                     </div>
                     <div class="polaroid-caption">Where our hearts aligned ✨</div>
                 </div>
                 <!-- Polaroid 2 -->
                 <div class="polaroid" style="--rotation: 2deg;">
                     <div class="polaroid-img-container">
-                        <img src="Juanita 1.JPG" alt="Juanita 1">
+                        <img src="Juanita3.JPG" alt="Juanita 1">
                     </div>
-                    <div class="polaroid-caption">Too hot for the planet 🍕</div>
+                    <div class="polaroid-caption">Our love will never end</div>
                 </div>
                 <!-- Polaroid 3 -->
                 <div class="polaroid" style="--rotation: -1deg;">
                     <div class="polaroid-img-container">
-                        <img src="Juanita 2.JPG" alt="Juanita 2">
+                        <img src="Juanita4.JPG" alt="Juanita 2">
                     </div>
                     <div class="polaroid-caption">Hottest Baby 📸</div>
                 </div>
@@ -1633,7 +1720,7 @@
             const firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-            window.onYouTubeIframeAPIReady = function() {
+            window.onYouTubeIframeAPIReady = function () {
                 player = new YT.Player('ytPlayer', {
                     height: '0',
                     width: '0',
