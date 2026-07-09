@@ -1197,6 +1197,29 @@
                 top: 0 !important;
             }
         }
+
+        /* SCROLL REVEAL ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-polaroid {
+            opacity: 0;
+            transform: translateY(40px) rotate(var(--rotation));
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal-polaroid.active {
+            opacity: 1;
+            transform: translateY(0) rotate(var(--rotation));
+        }
     </style>
 </head>
 
@@ -1956,6 +1979,61 @@
                     });
                 }, 4000); // matches the CSS transition length
             }
+
+            /* SCROLL REVEAL LOGIC */
+            function initScrollReveal() {
+                const cards = document.querySelectorAll('.card, .timeline-block');
+                cards.forEach(el => el.classList.add('reveal'));
+
+                const polaroids = document.querySelectorAll('.polaroid');
+                polaroids.forEach(el => el.classList.add('reveal-polaroid'));
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                cards.forEach(el => observer.observe(el));
+                polaroids.forEach(el => observer.observe(el));
+            }
+
+            /* 3D TILT EFFECT LOGIC FOR POLAROIDS */
+            function initTiltEffect() {
+                const polaroids = document.querySelectorAll('.polaroid');
+                polaroids.forEach(card => {
+                    const baseRotation = card.style.getPropertyValue('--rotation') || '0deg';
+                    
+                    card.addEventListener('mousemove', e => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        
+                        const rotateX = ((y - centerY) / centerY) * -15;
+                        const rotateY = ((x - centerX) / centerX) * 15;
+                        
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05) rotate(${baseRotation})`;
+                        card.style.zIndex = 10;
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = `rotate(${baseRotation})`;
+                        card.style.zIndex = 1;
+                    });
+                });
+            }
+
+            // Initialize new effects
+            window.addEventListener('load', () => {
+                initScrollReveal();
+                initTiltEffect();
+            });
         </script>
 </body>
 
