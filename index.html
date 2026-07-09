@@ -1745,85 +1745,40 @@
             });
 
 
-            /* MUSIC WIDGET CONTROLS WITH YOUTUBE PLAYER API */
+            /* MUSIC WIDGET CONTROLS WITH LOCAL AUDIO */
             const musicWidget = document.getElementById("musicPlayer");
             const playIcon = document.getElementById("playIcon");
-            let player;
             let isPlaying = false;
-
-            const playlist = [
-                { title: "Forest", artist: "Fancy Hagood", id: "DRRUDgq4T2g" },
-                { title: "Die With A Smile", artist: "Bruno Mars & Lady Gaga", id: "kPa7dyDXgqk" },
-                { title: "Perfect", artist: "Ed Sheeran", id: "2Vv-BfVoq4g" }
-            ];
-            let currentSongIndex = 0;
-
-            // Load YouTube Iframe Player API
-            const tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            const firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-            window.onYouTubeIframeAPIReady = function () {
-                player = new YT.Player('ytPlayer', {
-                    height: '0',
-                    width: '0',
-                    videoId: playlist[0].id,
-                    playerVars: {
-                        'autoplay': 0,
-                        'loop': 0,
-                        'controls': 0,
-                        'showinfo': 0,
-                        'rel': 0
-                    },
-                    events: {
-                        'onReady': (event) => {
-                            event.target.setVolume(45); // Safe volume level
-                        },
-                        'onStateChange': onPlayerStateChange
-                    }
-                });
-            }
-
-            function onPlayerStateChange(event) {
-                if (event.data == YT.PlayerState.PLAYING) {
-                    isPlaying = true;
-                    musicWidget.classList.add("playing");
-                    playIcon.innerHTML = "<i class='fas fa-pause'></i>";
-                } else if (event.data == YT.PlayerState.ENDED) {
-                    nextSong();
-                } else {
-                    if (event.data == YT.PlayerState.PAUSED) {
-                        isPlaying = false;
-                        musicWidget.classList.remove("playing");
-                        playIcon.innerHTML = "<i class='fas fa-play'></i>";
-                    }
-                }
-            }
+            
+            const audio = new Audio("Fancy Hagood - Forest (Official Music Video).mp3");
+            audio.volume = 0.45;
+            
+            audio.addEventListener('ended', () => {
+                // Loop the same song since we only have one MP3
+                audio.currentTime = 0;
+                audio.play();
+            });
 
             function nextSong() {
-                if (!player || typeof player.loadVideoById !== 'function') return;
-                currentSongIndex = (currentSongIndex + 1) % playlist.length;
-                const song = playlist[currentSongIndex];
-                
-                document.querySelector(".music-title").innerText = song.title;
-                document.querySelector(".music-artist").innerText = song.artist;
-                
-                player.loadVideoById(song.id);
+                // Restart the current song
+                audio.currentTime = 0;
+                audio.play();
                 isPlaying = true;
                 musicWidget.classList.add("playing");
                 playIcon.innerHTML = "<i class='fas fa-pause'></i>";
             }
 
             function toggleMusic() {
-                if (!player || typeof player.playVideo !== 'function') {
-                    console.log("YouTube Player is not fully ready.");
-                    return;
-                }
                 if (isPlaying) {
-                    player.pauseVideo();
+                    audio.pause();
+                    isPlaying = false;
+                    musicWidget.classList.remove("playing");
+                    playIcon.innerHTML = "<i class='fas fa-play'></i>";
                 } else {
-                    player.playVideo();
+                    audio.play();
+                    isPlaying = true;
+                    musicWidget.classList.add("playing");
+                    playIcon.innerHTML = "<i class='fas fa-pause'></i>";
                 }
             }
 
